@@ -759,16 +759,22 @@
             }
             
             // Déplacement
-            if (options.travelDistance > 20) {
-              const travelCost = (options.travelDistance - 20) * 2;
-              price += travelCost;
-              priceItems.push({
-                label: 'Déplacement hors zone',
-                price: travelCost,
-                calculation: `(${options.travelDistance} - 20) × 2₪ = ${travelCost}₪`
-              });
-            }
-            
+          if (options.travelDistance > 0) {
+  // Calcul de la distance aller-retour totale
+  const totalDistance = options.travelDistance * 2;
+  // On soustrait les 20 km inclus
+  const billableDistance = totalDistance > 20 ? totalDistance - 20 : 0;
+  const travelCost = billableDistance * 2;
+  
+  if (travelCost > 0) {
+    price += travelCost;
+    priceItems.push({
+      label: 'Déplacement hors zone',
+      price: travelCost,
+      calculation: `(${options.travelDistance} × 2 - 20) × 2₪ = ${billableDistance} × 2₪ = ${travelCost}₪`
+    });
+  }
+}    
             setTotalPrice(price);
             setBreakdown(priceItems);
           };
