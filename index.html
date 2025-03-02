@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>ABCPRODUCTION - Services de Production Vidéo</title>
     <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
@@ -124,26 +124,92 @@
         .tab-content.active {
             display: block;
         }
+        
+/* Optimisations mobiles */
+@media (max-width: 768px) {
+    /* Navigation responsive */
+    .navbar-mobile {
+        display: flex;
+        flex-direction: column;
+    }
+    .navbar-menu {
+        display: none;
+        width: 100%;
+    }
+    .navbar-menu.open {
+        display: flex;
+        flex-direction: column;
+        padding: 1rem 0;
+    }
+    .menu-toggle {
+        display: block;
+    }
+    
+    /* Tableaux responsifs */
+    .table-scroll {
+        max-width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    /* Calculateur optimisé */
+    .calculator-options {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    /* Ajustements du texte */
+    .title-sm {
+        font-size: 1.5rem;
+    }
+    .text-sm {
+        font-size: 0.875rem;
+    }
+}
+
+/* Classe pour faciliter le swipe sur les tableaux */
+.swipe-instruction {
+    display: none;
+}
+@media (max-width: 768px) {
+    .swipe-instruction {
+        display: block;
+        text-align: center;
+        font-style: italic;
+        color: #666;
+        padding: 0.5rem 0;
+        font-size: 0.8rem;
+    }
+}
     </style>
 </head>
 <body>
     <!-- Navigation -->
-    <nav class="navbar">
-        <div class="container mx-auto py-4 px-4 flex justify-between items-center">
-            <div class="flex items-center">
-                <div class="text-white font-bold text-xl">ABCPRODUCTION</div>
-                <div class="text-gray-300 ml-2">VISUAL SENSATIONS</div>
-            </div>
-            <div class="flex items-center space-x-6">
-                <a href="#accueil" class="text-white hover:text-gray-300">Accueil</a>
-                <a href="#services" class="text-white hover:text-gray-300">Services</a>
-                <a href="#calculateur" class="text-white hover:text-gray-300">Calculateur</a>
-                <a href="#tarifs" class="text-white hover:text-gray-300">Tarifs</a>
-                <a href="#contact" class="text-white hover:text-gray-300">Contact</a>
-                <div class="language-switch text-white" onclick="toggleLanguage()">FR | עב</div>
-            </div>
+   <nav class="navbar">
+    <div class="container mx-auto py-4 px-4 flex flex-wrap justify-between items-center">
+        <div class="flex items-center">
+            <div class="text-white font-bold text-xl">ABCPRODUCTION</div>
+            <div class="text-gray-300 ml-2">VISUAL SENSATIONS</div>
         </div>
-    </nav>
+        
+        <!-- Bouton menu hamburger (visible uniquement sur mobile) -->
+        <button onclick="toggleMobileMenu()" class="menu-toggle lg:hidden text-white focus:outline-none">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+        </button>
+        
+        <!-- Menu de navigation -->
+        <div class="navbar-menu lg:flex items-center space-x-6">
+            <a href="#accueil" class="text-white hover:text-gray-300 block py-2 lg:py-0">Accueil</a>
+            <a href="#services" class="text-white hover:text-gray-300 block py-2 lg:py-0">Services</a>
+            <a href="#calculateur" class="text-white hover:text-gray-300 block py-2 lg:py-0">Calculateur</a>
+            <a href="#tarifs" class="text-white hover:text-gray-300 block py-2 lg:py-0">Tarifs</a>
+            <a href="#contact" class="text-white hover:text-gray-300 block py-2 lg:py-0">Contact</a>
+            <div class="language-switch text-white block py-2 lg:py-0" onclick="toggleLanguage()">FR | עב</div>
+        </div>
+    </div>
+</nav>
 
     <!-- Section d'accueil -->
     <section id="accueil" class="section bg-gradient-to-r from-blue-500 to-teal-400 text-white">
@@ -966,6 +1032,42 @@
         };
 
         ReactDOM.render(<CalculateurPrixVideo />, document.getElementById('calculateur-root'));
-    </script>
+   <script>
+    // Fonction pour le menu hamburger
+    function toggleMobileMenu() {
+        const menu = document.querySelector('.navbar-menu');
+        menu.classList.toggle('open');
+    }
+    
+    // Fonction pour ajouter une instruction de swipe à tous les tableaux
+    function addSwipeInstructions() {
+        if (window.innerWidth <= 768) {
+            const tableContainers = document.querySelectorAll('.overflow-x-auto');
+            tableContainers.forEach(container => {
+                if (!container.querySelector('.swipe-instruction')) {
+                    const instruction = document.createElement('div');
+                    instruction.className = 'swipe-instruction';
+                    instruction.innerHTML = '← Faites glisser pour voir tout le tableau →';
+                    container.parentNode.insertBefore(instruction, container);
+                }
+            });
+        }
+    }
+    
+    // Exécuter quand le DOM est chargé
+    document.addEventListener('DOMContentLoaded', function() {
+        addSwipeInstructions();
+        
+        // Ajouter la classe aux éléments qui doivent être responsifs
+        document.querySelectorAll('.overflow-x-auto').forEach(el => {
+            el.classList.add('table-scroll');
+        });
+    });
+    
+    // Ajuster si la fenêtre est redimensionnée
+    window.addEventListener('resize', function() {
+        addSwipeInstructions();
+    });
+</script>
 </body>
 </html>
