@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ABCPRODUCTION - Services de Production Vidéo</title>
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Styles généraux */
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+        .section {
+            padding: 50px 20px;
+        }
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 2rem;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        .hebrew {
+            direction: rtl;
+            text-align: right;
+        }
+        .french {
+            direction: ltr;
+            text-align: left;
+        }
+        
+        /* Styles pour les tableaux */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        
+        /* Navigation et en-tête */
+        .navbar {
+            background-color: #2c3e50;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .language-switch {
+            cursor: pointer;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+        .language-switch:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Footer styles */
+        .footer {
+            background-color: #2c3e50;
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+        
+        /* Animations */
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 1.75rem;
+            }
+            table {
+                font-size: 0.85rem;
+            }
+            th, td {
+                padding: 8px;
+            }
+        }
+        
+        /* Tabs for price tables */
+        .tab-button {
+            padding: 10px 20px;
+            background-color: #f5f5f5;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px 5px 0 0;
+            margin-right: 5px;
+        }
+        .tab-button.active {
+            background-color: #3498db;
+            color: white;
+        }
+        .tab-content {
+            display: none;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 0 5px 5px 5px;
+        }
+        .tab-content.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container mx-auto py-4 px-4 flex justify-between items-center">
+            <div class="flex items-center">
+                <div class="text-white font-bold text-xl">ABCPRODUCTION</div>
+                <div class="text-gray-300 ml-2">VISUAL SENSATIONS</div>
+            </div>
+            <div class="flex items-center space-x-6">
+                <a href="#accueil" class="text-white hover:text-gray-300">Accueil</a>
+                <a href="#services" class="text-white hover:text-gray-300">Services</a>
+                <a href="#calculateur" class="text-white hover:text-gray-300">Calculateur</a>
+                <a href="#tarifs" class="text-white hover:text-gray-300">Tarifs</a>
+                <a href="#contact" class="text-white hover:text-gray-300">Contact</a>
+                <div class="language-switch text-white" onclick="toggleLanguage()">FR | עב</div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Section d'accueil -->
+    <section id="accueil" class="section bg-gradient-to-r from-blue-500 to-teal-400 text-white">
+        <div class="container mx-auto max-w-5xl">
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <div class="fade-in">
+                    <h1 class="text-4xl md:text-5xl font-bold mb-4">ABCPRODUCTION</h1>
+                    <p class="text-xl mb-6">Votre partenaire en production vidéo professionnelle</p>
+                    <p class="mb-8">Nous créons des contenus visuels qui captent l'attention et transmettent votre message avec impact.</p>
+                    <div class="flex space-x-4">
+                        <a href="#calculateur" class="bg-white text-blue-600 font-bold py-2 px-6 rounded-full hover:bg-gray-100 transition duration-300">Calculer un devis</a>
+                        <a href="#contact" class="bg-transparent border-2 border-white text-white font-bold py-2 px-6 rounded-full hover:bg-white hover:text-blue-600 transition duration-300">Nous contacter</a>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <!-- Placeholder pour le logo ou une image -->
+                    <div class="bg-white rounded-lg p-6 inline-block shadow-lg">
+                        <div class="text-4xl font-bold text-blue-600">ABC</div>
+                        <div class="text-sm text-gray-600">VISUAL SENSATIONS</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section des services -->
+    <section id="services" class="section bg-gray-100">
+        <div class="container mx-auto max-w-5xl">
+            <h2 class="section-title">Nos Services</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300">
+                    <div class="text-3xl text-blue-500 mb-4">🎬</div>
+                    <h3 class="text-xl font-bold mb-2">Montage Vidéo</h3>
+                    <p>Montage professionnel de vos séquences vidéo avec tarification à la minute.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300">
+                    <div class="text-3xl text-blue-500 mb-4">📹</div>
+                    <h3 class="text-xl font-bold mb-2">Tournage</h3>
+                    <p>Services de tournage professionnels pour interviews, événements et présentations.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300">
+                    <div class="text-3xl text-blue-500 mb-4">🌐</div>
+                    <h3 class="text-xl font-bold mb-2">Formats Multiples</h3>
+                    <p>Adaptation de votre contenu pour différentes plateformes et réseaux sociaux.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300">
+                    <div class="text-3xl text-blue-500 mb-4">⚡</div>
+                    <h3 class="text-xl font-bold mb-2">Livraison Express</h3>
+                    <p>Option de livraison rapide en 48h pour vos projets urgents.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Section calculateur -->
+    <section id="calculateur" class="section">
+        <div class="container mx-auto max-w-5xl">
+            <h2 class="section-title">Calculateur de Prix</h2>
+            <div id="calculateur-root"></div>
+        </div>
+    </section>
+
+    <!-- Section des tarifs -->
+    <section id="tarifs" class="section bg-gray-100">
+        <div class="container mx-auto max-w-5xl">
+            <h2 class="section-title">Grille Tarifaire Complète</h2>
+            
+            <!-- Onglets pour les tableaux de prix -->
+            <div class="mb-4">
+                <button class="tab-button active" onclick="openTab('montage-tab')">Montage Vidéo</button>
+                <button class="tab-button" onclick="openTab('tournage-tab')">Tournage + Montage</button>
+                <button class="tab-button" onclick="openTab('options-tab')">Options Additionnelles</button>
+            </div>
+            
+            <!-- Contenu des onglets -->
+            <div id="montage-tab" class="tab-content active">
+                <h3 class="text-xl font-bold mb-4 text-blue-700">Montage Vidéo - Tarif de base : 100₪ par minute</h3>
+                <div class="overflow-x-auto">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Durée de la vidéo</th>
+                                <th>Prix par vidéo</th>
+                                <th>Prix avec remise<br>4-10 vidéos</th>
+                                <th>Prix avec remise<br>11-20 vidéos</th>
+                                <th>Prix avec remise<br>21+ vidéos</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1 minute</td>
+                                <td>100₪</td>
+                                <td>90₪/vidéo</td>
+                                <td>80₪/vidéo</td>
+                                <td>70₪/vidéo</td>
+                            </tr>
+                            <tr>
+                                <td>2 minutes</td>
+                                <td>200₪</td>
+                                <td>180₪/vidéo</td>
+                                <td>160₪/vidéo</td>
+                                <td>140₪/vidéo</td>
+                            </tr>
+                            <tr>
+                                <td>3 minutes</td>
+                                <td>300₪</td>
+                                <td>270₪/vidéo</td>
+                                <td>240₪/vidéo</td>
+                                <td>210₪/vidéo</td>
+                            </tr>
+                            <tr>
+                                <td>5 minutes</td>
+                                <td>500₪</td>
+                                <td>450₪/vidéo</td>
+                                <td>400₪/vidéo</td>
+                                <td>350₪/vidéo</td>
+                            </tr>
+                            <tr>
+                                <td>10 minutes</td>
+                                <td>1000₪</td>
+                                <td>900₪/vidéo</td>
+                                <td>800₪/vidéo</td>
+                                <td>700₪/vidéo</td>
+                            </tr>
+                            <tr>
+                                <td>15 minutes</td>
+                                <td>1500₪</td>
+                                <td>1350₪/vidéo</td>
+                                <td>1200₪/vidéo</td>
+                                <td>1050₪/vidéo</td>
+                            </tr>
+                            <tr>
+                                <td>20 minutes</td>
+                                <td>2000₪</td>
+                                <td>1800₪/vidéo</td>
+                                <td>1600₪/vidéo</td>
+                                <td>1400₪/vidéo</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div id="tournage-tab" class="tab-content">
+                <h3 class="text-xl font-bold mb-4 text-blue-700">Tournage + Montage</h3>
+                <div class="overflow-x-auto">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Type de vidéo</th>
+                                <th>1-3 minutes</th>
+                                <th>4-7 minutes</th>
+                                <th>8-15 minutes</th>
+                                <th>16-20 minutes</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Interview simple</td>
+                                <td>900₪</td>
+                                <td>1500₪</td>
+                                <td>2200₪</td>
+                                <td>3000₪</td>
+                                <td>Une personne filmée en plan fixe avec un fond simple</td>
+                            </tr>
+                            <tr>
+                                <td>Double interview/Conversation</td>
+                                <td>1200₪</td>
+                                <td>1900₪</td>
+                                <td>2700₪</td>
+                                <td>3500₪</td>
+                                <td>Deux personnes filmées avec alternance de plans</td>
+                            </tr>
+                            <tr>
+                                <td>Présentation lieu/Produit</td>
+                                <td>1400₪</td>
+                                <td>2200₪</td>
+                                <td>3100₪</td>
+                                <td>4000₪</td>
+                                <td>Tournage en mouvement à travers un espace ou d'objets</td>
+                            </tr>
+                            <tr>
+                                <td>Événement</td>
+                                <td>1800₪</td>
+                                <td>2800₪</td>
+                                <td>3800₪</td>
+                                <td>5000₪</td>
+                                <td>Captation d'événement avec plusieurs séquences/angles</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <h4 class="text-lg font-bold mt-6 mb-2 text-blue-600">Remises volumétriques - Tournage + Montage</h4>
+                <div class="overflow-x-auto">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nombre de vidéos</th>
+                                <th>Pourcentage de remise</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1-3 vidéos</td>
+                                <td>Prix standard</td>
+                            </tr>
+                            <tr>
+                                <td>4-7 vidéos</td>
+                                <td>-10% sur le prix total</td>
+                            </tr>
+                            <tr>
+                                <td>8-15 vidéos</td>
+                                <td>-15% sur le prix total</td>
+                            </tr>
+                            <tr>
+                                <td>16+ vidéos</td>
+                                <td>-20% sur le prix total</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div id="options-tab" class="tab-content">
+                <h3 class="text-xl font-bold mb-4 text-blue-700">Options Additionnelles</h3>
+                
+                <h4 class="text-lg font-bold mb-2 text-blue-600">A. Pour commandes de 1-10 vidéos</h4>
+                <div class="overflow-x-auto">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Service</th>
+                                <th>1-3 minutes</th>
+                                <th>4-10 minutes</th>
+                                <th>11-20 minutes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Sous-titres</td>
+                                <td>+60₪/vidéo</td>
+                                <td>+120₪/vidéo</td>
+                                <td>+180₪/vidéo</td>
+                            </tr>
+                            <tr>
+                                <td>Effets spéciaux/transitions</td>
+                                <td>+90₪/vidéo</td>
+                                <td>+150₪/vidéo</td>
+                                <td>+220₪/vidéo</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- Footer -->
+    <footer class="footer">
+        <div class="container mx-auto max-w-5xl">
+            <div class="text-center mb-6">
+                <div class="text-2xl font-bold mb-2">ABCPRODUCTION</div>
+                <div class="text-sm">VISUAL SENSATIONS</div>
+            </div>
+            <div class="flex justify-center space-x-4 mb-6">
+                <a href="#" class="hover:text-blue-300">Facebook</a>
+                <a href="#" class="hover:text-blue-300">Instagram</a>
+                <a href="#" class="hover:text-blue-300">YouTube</a>
+                <a href="#" class="hover:text-blue-300">LinkedIn</a>
+            </div>
+            <div class="text-sm opacity-70">
+                <p>© 2025 ABCPRODUCTION - Tous droits réservés</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Script pour les onglets -->
+    <script>
+        function openTab(tabId) {
+            // Masquer tous les contenus d'onglets
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Désactiver tous les boutons d'onglets
+            const tabButtons = document.querySelectorAll('.tab-button');
+            tabButtons.forEach(button => {
+                button.classList.remove('active');
+            });
+            
+            // Afficher le contenu de l'onglet sélectionné
+            document.getElementById(tabId).classList.add('active');
+            
+            // Activer le bouton d'onglet sélectionné
+            Array.from(tabButtons).find(button => button.getAttribute('onclick').includes(tabId)).classList.add('active');
+        }
+        
+        // Fonction pour basculer entre les langues (à implémenter plus tard)
+        function toggleLanguage() {
+            alert('Fonctionnalité de changement de langue à venir');
+        }
+    </script>
+
+    <!-- Intégration du calculateur -->
+    <script type="text/babel">
+        const CalculateurPrixVideo = () => {
+          // États pour stocker les choix de l'utilisateur
+          const [serviceType, setServiceType] = React.useState('montage');
+          const [duration, setDuration] = React.useState('1');
+          const [videoType, setVideoType] = React.useState('interview-simple');
+          const [quantity, setQuantity] = React.useState(1);
+          const [options, setOptions] = React.useState({
+            subtitles: false,
+            effects: false,
+            extraFormats: 0,
+            allSocialFormats: false,
+            expressDelivery: false,
+            travelDistance: 0
+          });
+          
+          // État pour le prix final
+          const [totalPrice, setTotalPrice] = React.useState(0);
+          const [breakdown, setBreakdown] = React.useState([]);
+          
+          // Données de tarification
+          const montageBaseRates = {
+            '1': 100,
+            '2': 200,
+            '3': 300,
+            '5': 500,
+            '10': 1000,
+            '15': 1500,
+            '20': 2000
+          };
+          
+          const montageDiscounts = {
+            '1-3': 1,
+            '4-10': 0.9,
+            '11-20': 0.8,
+            '21+': 0.7
+          };
+          
+          const tournageMontageRates = {
+            'interview-simple': {
+              '1-3': 900,
+              '4-7': 1500,
+              '8-15': 2200,
+              '16-20': 3000
+            },
+            'double-interview': {
+              '1-3': 1200,
+              '4-7': 1900,
+              '8-15': 2700,
+              '16-20': 3500
+            },
+            'presentation': {
+              '1-3': 1400,
+              '4-7': 2200,
+              '8-15': 3100,
+              '16-20': 4000
+            },
+            'evenement': {
+              '1-3': 1800,
+              '4-7': 2800,
+              '8-15': 3800,
+              '16-20': 5000
+            }
+          };
+          
+          const tournageDiscounts = {
+            '1-3': 1,
+            '4-7': 0.9,
+            '8-15': 0.85,
+            '16+': 0.8
+          };
+          
+          const additionalOptions = {
+            subtitles: {
+              small: {
+                '1-3': 60,
+                '4-10': 120,
+                '11-20': 180
+              },
+              large: {
+                '1-3': 20,
+                '4-10': 40,
+                '11-20': 60
+              }
+            },
+            effects: {
+              small: {
+                '1-3': 90,
+                '4-10': 150,
+                '11-20': 220
+              },
+              large: {
+                '1-3': 30,
+                '4-10': 60,
+                '11-20': 90
+              }
+            },
+            extraFormat: {
+              small: 100,
+              large: 50
+            },
+            allSocialFormats: {
+              small: 200,
+              large: 120
+            }
+          };
+          
+          // Fonction pour déterminer la tranche de durée (pour tournage + montage)
+          const getDurationRange = (duration) => {
+            const durationNum = parseInt(duration);
+            if (durationNum >= 1 && durationNum <= 3) return '1-3';
+            if (durationNum >= 4 && durationNum <= 7) return '4-7';
+            if (durationNum >= 8 && durationNum <= 15) return '8-15';
+            if (durationNum >= 16 && durationNum <= 20) return '16-20';
+            return '1-3'; // Par défaut
+          };
+          
+          // Fonction pour déterminer la tranche de quantité (pour les remises)
+          const getQuantityRange = (qty) => {
+            if (qty >= 1 && qty <= 3) return '1-3';
+            if (qty >= 4 && qty <= 7) return '4-7';
+            if (qty >= 8 && qty <= 15) return '8-15';
+            if (qty >= 16) return '16+';
+            return '1-3'; // Par défaut
+          };
+          
+          // Fonction pour déterminer la tranche de quantité (pour montage)
+          const getMontageQuantityRange = (qty) => {
+            if (qty >= 1 && qty <= 3) return '1-3';
+            if (qty >= 4 && qty <= 10) return '4-10';
+            if (qty >= 11 && qty <= 20) return '11-20';
+            if (qty >= 21) return '21+';
+            return '1-3'; // Par défaut
+          };
+          
+          // Fonction pour déterminer la tranche de durée (pour les options)
+          const getOptionDurationRange = (duration) => {
+            const durationNum = parseInt(duration);
+            if (durationNum >= 1 && durationNum <= 3) return '1-3';
+            if (durationNum >= 4 && durationNum <= 10) return '4-10';
+            if (durationNum >= 11 && durationNum <= 20) return '11-20';
+            return '1-3'; // Par défaut
+          };
+          
+          // Fonction pour calculer le prix
+          const calculatePrice = () => {
+            let price = 0;
+            let priceItems = [];
+            
+            // 1. Prix de base selon le service
+            if (serviceType === 'montage') {
+              const basePrice = montageBaseRates[duration] * quantity;
+              const discountMultiplier = montageDiscounts[getMontageQuantityRange(quantity)];
+              const discountPercent = Math.round((1 - discountMultiplier) * 100);
+              priceItems.push({
+                label: `Montage vidéo (${duration} min × ${quantity} vidéos)`,
+                price: basePrice * discountMultiplier,
+                calculation: `${montageBaseRates[duration]}₪ × ${quantity} ${discountPercent > 0 ? `avec remise de ${discountPercent}%` : ''}`
+              });
+              price = basePrice * discountMultiplier;
+            } else {
+              const durationRange = getDurationRange(duration);
+              const basePrice = tournageMontageRates[videoType][durationRange] * quantity;
+              const discountMultiplier = tournageDiscounts[getQuantityRange(quantity)];
+              const discountPercent = Math.round((1 - discountMultiplier) * 100);
+              
+              let videoTypeLabel = '';
+              switch(videoType) {
+                case 'interview-simple': videoTypeLabel = 'Interview simple'; break;
+                case 'double-interview': videoTypeLabel = 'Double interview/Conversation'; break;
+                case 'presentation': videoTypeLabel = 'Présentation lieu/Produit'; break;
+                case 'evenement': videoTypeLabel = 'Événement'; break;
+              }
+              
+              priceItems.push({
+                label: `Tournage + Montage (${videoTypeLabel}, ${duration} min × ${quantity} vidéos)`,
+                price: basePrice * discountMultiplier,
+                calculation: `${tournageMontageRates[videoType][durationRange]}₪ × ${quantity} ${discountPercent > 0 ? `avec remise de ${discountPercent}%` : ''}`
+              });
+              price = basePrice * discountMultiplier;
+            }
+            
+            // 2. Options additionnelles
+            const durationRange = getOptionDurationRange(duration);
+            const isLargeOrder = quantity >= 11;
+            const optionCategory = isLargeOrder ? 'large' : 'small';
+            
+            // Sous-titres
+            if (options.subtitles) {
+              const subtitlePrice = additionalOptions.subtitles[optionCategory][durationRange] * quantity;
+              price += subtitlePrice;
+              priceItems.push({
+                label: 'Sous-titres',
+                price: subtitlePrice,
+                calculation: `${additionalOptions.subtitles[optionCategory][durationRange]}₪ × ${quantity}`
+              });
+            }
+            
+            // Effets spéciaux
+            if (options.effects) {
+              const effectsPrice = additionalOptions.effects[optionCategory][durationRange] * quantity;
+              price += effectsPrice;
+              priceItems.push({
+                label: 'Effets spéciaux/transitions',
+                price: effectsPrice,
+                calculation: `${additionalOptions.effects[optionCategory][durationRange]}₪ × ${quantity}`
+              });
+            }
+            
+            // Formats supplémentaires
+            if (options.extraFormats > 0) {
+              const formatPrice = additionalOptions.extraFormat[quantity >= 4 ? 'large' : 'small'] * options.extraFormats * quantity;
+              price += formatPrice;
+              priceItems.push({
+                label: `Format${options.extraFormats > 1 ? 's' : ''} supplémentaire${options.extraFormats > 1 ? 's' : ''}`,
+                price: formatPrice,
+                calculation: `${additionalOptions.extraFormat[quantity >= 4 ? 'large' : 'small']}₪ × ${options.extraFormats} × ${quantity}`
+              });
+            }
+            
+            // Pack tous formats sociaux
+            if (options.allSocialFormats) {
+              const allFormatsPrice = additionalOptions.allSocialFormats[quantity >= 4 ? 'large' : 'small'] * quantity;
+              price += allFormatsPrice;
+              priceItems.push({
+                label: 'Pack tous formats sociaux',
+                price: allFormatsPrice,
+                calculation: `${additionalOptions.allSocialFormats[quantity >= 4 ? 'large' : 'small']}₪ × ${quantity}`
+              });
+            }
+            
+            // Livraison express
+            if (options.expressDelivery) {
+              const expressPrice = price * 0.2;
+              price += expressPrice;
+              priceItems.push({
+                label: 'Livraison express (48h)',
+                price: expressPrice,
+                calculation: `20% du total = ${expressPrice.toFixed(2)}₪`
+              });
+            }
+            
+            // Déplacement
+            if (options.travelDistance > 20) {
+              const travelCost = (options.travelDistance - 20) * 2;
+              price += travelCost;
+              priceItems.push({
+                label: 'Déplacement hors zone',
+                price: travelCost,
+                calculation: `(${options.travelDistance} - 20) × 2₪ = ${travelCost}₪`
+              });
+            }
+            
+            setTotalPrice(price);
+            setBreakdown(priceItems);
+          };
+          
+          // Recalculer le prix à chaque changement
+          React.useEffect(() => {
+            calculatePrice();
+          }, [serviceType, duration, videoType, quantity, options]);
+          
+          return (
+            <div className="mx-auto p-4 bg-white rounded-lg shadow">
+              <h3 className="text-xl font-bold text-center mb-6 text-blue-800">Calculateur de Devis</h3>
+              
+              {/* Type de service */}
+              <div className="mb-6">
+                <h3 className="text-lg font-semibold mb-2 text-blue-700">Type de service</h3>
+                <div className="flex flex-col md:flex-row gap-2">
+                  <button
+                    className={`px-4 py-2 rounded ${serviceType === 'montage' ? 'bg-blue-600 text-white' : 'bg-gray-200'}`}
+                    onClick={() => setServiceType('montage')}
+                  >
+                    Montage vidéo uniquement
+                  </button>
+                  <button
+                    className={`px-4 py-2 rounded ${serviceType === 'tournage-montage' ? 'bg-blue-600 text-white' : 'bg-gray-200'}`}
+                    onClick={() => setServiceType('tournage-montage')}
+                  >
+                    Tournage + Montage
+                  </button>
+                </div>
+              </div>
+              
+              {/* Durée */}
+              <div className="mb-6">
+                <h3 className="text-lg font-semibold mb-2 text-blue-700">Durée de la vidéo</h3>
+                <select 
+                  className="w-full p-2 border rounded"
+                  value={duration}
+                  onChange={(e) => setDuration(e.target.value)}
+                >
+                  <option value="1">1 minute</option>
+                  <option value="2">2 minutes</option>
+                  <option value="3">3 minutes</option>
+                  <option value="5">5 minutes</option>
+                  <option value="10">10 minutes</option>
+                  <option value="15">15 minutes</option>
+                  <option value="20">20 minutes</option>
+                </select>
+              </div>
+              
+              {/* Type de vidéo (seulement pour tournage + montage) */}
+              {serviceType === 'tournage-montage' && (
+                <div className="mb-6">
+                  <h3 className="text-lg font-semibold mb-2 text-blue-700">Type de vidéo</h3>
+                  <select 
+                    className="w-full p-2 border rounded"
+                    value={videoType}
+                    onChange={(e) => setVideoType(e.target.value)}
+                  >
+                    <option value="interview-simple">Interview simple</option>
+                    <option value="double-interview">Double interview/Conversation</option>
+                    <option value="presentation">Présentation lieu/Produit</option>
+                    <option value="evenement">Événement</option>
+                  </select>
+                </div>
+              )}
+              
+              {/* Quantité */}
+              <div className="mb-6">
+                <h3 className="text-lg font-semibold mb-2 text-blue-700">Nombre de vidéos</h3>
+                <input
+                  type="number"
+                  min="1"
+                  className="w-full p-2 border rounded"
+                  value={quantity}
+                  onChange={(e) => setQuantity(parseInt(e.target.value) || 1)}
+                />
+              </div>
+              
+              {/* Options */}
+              <div className="mb-6">
+                <h3 className="text-lg font-semibold mb-2 text-blue-700">Options additionnelles</h3>
+                
+                <div className="flex items-center mb-2">
+                  <input
+                    type="checkbox"
+                    id="subtitles"
+                    checked={options.subtitles}
+                    onChange={(e) => setOptions({...options, subtitles: e.target.checked})}
+                    className="mr-2"
+                  />
+                  <label htmlFor="subtitles">Sous-titres</label>
+                </div>
+                
+                <div className="flex items-center mb-2">
+                  <input
+                    type="checkbox"
+                    id="effects"
+                    checked={options.effects}
+                    onChange={(e) => setOptions({...options, effects: e.target.checked})}
+                    className="mr-2"
+                  />
+                  <label htmlFor="effects">Effets spéciaux/transitions</label>
+                </div>
+                
+                <div className="mb-2">
+                  <label htmlFor="extraFormats" className="block mb-1">Formats supplémentaires</label>
+                  <input
+                    type="number"
+                    id="extraFormats"
+                    min="0"
+                    className="w-full p-2 border rounded"
+                    value={options.extraFormats}
+                    onChange={(e) => setOptions({...options, extraFormats: parseInt(e.target.value) || 0})}
+                  />
+                </div>
+                
+                <div className="flex items-center mb-2">
+                  <input
+                    type="checkbox"
+                    id="allSocialFormats"
+                    checked={options.allSocialFormats}
+                    onChange={(e) => setOptions({...options, allSocialFormats: e.target.checked})}
+                    className="mr-2"
+                  />
+                  <label htmlFor="allSocialFormats">Pack tous formats sociaux</label>
+                </div>
+                
+                <div className="flex items-center mb-2">
+                  <input
+                    type="checkbox"
+                    id="expressDelivery"
+                    checked={options.expressDelivery}
+                    onChange={(e) => setOptions({...options, expressDelivery: e.target.checked})}
+                    className="mr-2"
+                  />
+                  <label htmlFor="expressDelivery">Livraison express (48h)</label>
+                </div>
+                
+                <div className="mb-2">
+                  <label htmlFor="travelDistance" className="block mb-1">Lieu de déplacement</label>
+                  <select 
+                    className="w-full p-2 border rounded"
+                    value={options.travelDistance}
+                    onChange={(e) => setOptions({...options, travelDistance: parseInt(e.target.value) || 0})}
+                  >
+                    <option value="0">Ashdod (local)</option>
+                    <option value="25">Ashkelon (25 km)</option>
+                    <option value="33">Rehovot (33 km)</option>
+                    <option value="40">Rishon LeZion (40 km)</option>
+                    <option value="45">Tel Aviv (45 km)</option>
+                    <option value="53">Jérusalem (53 km)</option>
+                    <option value="62">Netanya (62 km)</option>
+                    <option value="73">Haïfa (73 km)</option>
+                    <option value="86">Beer-Sheva (86 km)</option>
+                    <option value="153">Eilat (153 km)</option>
+                  </select>
+                </div>
+              </div>
+              
+              {/* Résultat */}
+              <div className="mt-8 bg-gray-100 p-4 rounded">
+                <h3 className="text-xl font-bold mb-4 text-blue-800">Devis estimatif</h3>
+                
+                <div className="space-y-2 mb-4">
+                  {breakdown.map((item, index) => (
+                    <div key={index} className="flex justify-between">
+                      <div>
+                        <span className="font-medium">{item.label}</span>
+                        <span className="text-sm text-gray-600 block">{item.calculation}</span>
+                      </div>
+                      <span>{item.price.toFixed(2)}₪</span>
+                    </div>
+                  ))}
+                </div>
+                
+                <div className="border-t pt-4 flex justify-between items-center">
+                  <span className="text-xl font-bold">Total</span>
+                  <span className="text-xl font-bold text-blue-700">{totalPrice.toFixed(2)}₪</span>
+                </div>
+              </div>
+              
+              <div className="mt-6 text-center text-sm text-gray-600">
+                <p>* 2 séries de révisions sont incluses dans les tarifs</p>
+                <p>* Délai de livraison standard : 5-10 jours ouvrés selon volume</p>
+              </div>
+            </div>
+          );
+        };
+
+        ReactDOM.render(<CalculateurPrixVideo />, document.getElementById('calculateur-root'));
+    </script>
+</body>
+</html>
