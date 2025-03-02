@@ -1032,42 +1032,6 @@
         };
 
         ReactDOM.render(<CalculateurPrixVideo />, document.getElementById('calculateur-root'));
-   <script>
-    // Fonction pour le menu hamburger
-    function toggleMobileMenu() {
-        const menu = document.querySelector('.navbar-menu');
-        menu.classList.toggle('open');
-    }
-    
-    // Fonction pour ajouter une instruction de swipe à tous les tableaux
-    function addSwipeInstructions() {
-        if (window.innerWidth <= 768) {
-            const tableContainers = document.querySelectorAll('.overflow-x-auto');
-            tableContainers.forEach(container => {
-                if (!container.querySelector('.swipe-instruction')) {
-                    const instruction = document.createElement('div');
-                    instruction.className = 'swipe-instruction';
-                    instruction.innerHTML = '← Faites glisser pour voir tout le tableau →';
-                    container.parentNode.insertBefore(instruction, container);
-                }
-            });
-        }
-    }
-    
-    // Exécuter quand le DOM est chargé
-    document.addEventListener('DOMContentLoaded', function() {
-        addSwipeInstructions();
-        
-        // Ajouter la classe aux éléments qui doivent être responsifs
-        document.querySelectorAll('.overflow-x-auto').forEach(el => {
-            el.classList.add('table-scroll');
-        });
-    });
-    
-    // Ajuster si la fenêtre est redimensionnée
-    window.addEventListener('resize', function() {
-        addSwipeInstructions();
-    });
 </script>
 </body>
 </html>
