@@ -1066,6 +1066,7 @@
         addSwipeInstructions();
     });
                       // Script de traduction français/hébreu
+// Objet de traductions complet
 const translations = {
     fr: {
         // Navigation
@@ -1073,8 +1074,97 @@ const translations = {
         "nav_services": "Services",
         "nav_calculateur": "Calculateur",
         "nav_tarifs": "Tarifs",
-        "nav_contact": "Contact"
-        // Ajoutez d'autres traductions au besoin
+        "nav_contact": "Contact",
+        
+        // Accueil
+        "accueil_titre": "Votre partenaire en production vidéo professionnelle",
+        "accueil_desc": "Nous créons des contenus visuels qui captent l'attention et transmettent votre message avec impact.",
+        "accueil_calculer": "Calculer un devis",
+        "accueil_contacter": "Nous contacter",
+        
+        // Services
+        "services_titre": "Nos Services",
+        "service1_titre": "Montage Vidéo",
+        "service1_desc": "Montage professionnel de vos séquences vidéo avec tarification à la minute.",
+        "service2_titre": "Tournage",
+        "service2_desc": "Services de tournage professionnels pour interviews, événements et présentations.",
+        "service3_titre": "Formats Multiples",
+        "service3_desc": "Adaptation de votre contenu pour différentes plateformes et réseaux sociaux.",
+        "service4_titre": "Livraison Express",
+        "service4_desc": "Option de livraison rapide en 48h pour vos projets urgents.",
+        
+        // Calculateur
+        "calc_titre": "Calculateur de Prix",
+        "calc_devis": "Calculateur de Devis",
+        "calc_type_service": "Type de service",
+        "calc_montage": "Montage vidéo uniquement",
+        "calc_tournage": "Tournage + Montage",
+        "calc_duree": "Durée de la vidéo",
+        "calc_minute": "minute",
+        "calc_minutes": "minutes",
+        "calc_type_video": "Type de vidéo",
+        "calc_interview": "Interview simple",
+        "calc_double_interview": "Double interview/Conversation",
+        "calc_presentation": "Présentation lieu/Produit",
+        "calc_evenement": "Événement",
+        "calc_nombre": "Nombre de vidéos",
+        "calc_options": "Options additionnelles",
+        "calc_soustitres": "Sous-titres",
+        "calc_effets": "Effets spéciaux/transitions",
+        "calc_formats": "Formats supplémentaires",
+        "calc_pack": "Pack tous formats sociaux",
+        "calc_express": "Livraison express (48h)",
+        "calc_lieu": "Lieu de déplacement",
+        "calc_resultat": "Devis estimatif",
+        "calc_total": "Total",
+        "calc_note1": "* 2 séries de révisions sont incluses dans les tarifs",
+        "calc_note2": "* Délai de livraison standard : 5-10 jours ouvrés selon volume",
+        
+        // Tarifs
+        "tarifs_titre": "Grille Tarifaire Complète",
+        "tarif_montage": "Montage Vidéo",
+        "tarif_tournage": "Tournage + Montage",
+        "tarif_options": "Options Additionnelles",
+        "tarif_base": "Montage Vidéo - Tarif de base : 100₪ par minute",
+        "tarif_duree": "Durée de la vidéo",
+        "tarif_prix": "Prix par vidéo",
+        "tarif_remise": "Prix avec remise",
+        "tarif_videos": "vidéos",
+        "tarif_type_video": "Type de vidéo",
+        "tarif_description": "Description",
+        "tarif_interview": "Interview simple",
+        "tarif_double": "Double interview/Conversation",
+        "tarif_presentation": "Présentation lieu/Produit",
+        "tarif_evenement": "Événement",
+        "tarif_desc_interview": "Une personne filmée en plan fixe avec un fond simple",
+        "tarif_desc_double": "Deux personnes filmées avec alternance de plans",
+        "tarif_desc_presentation": "Tournage en mouvement à travers un espace ou d'objets",
+        "tarif_desc_evenement": "Captation d'événement avec plusieurs séquences/angles",
+        "tarif_remises": "Remises volumétriques - Tournage + Montage",
+        "tarif_nombre": "Nombre de vidéos",
+        "tarif_pourcentage": "Pourcentage de remise",
+        "tarif_standard": "Prix standard",
+        "tarif_remise_pourcentage": "sur le prix total",
+        "tarif_commandes1": "A. Pour commandes de 1-10 vidéos",
+        "tarif_commandes2": "B. Pour commandes de 11+ vidéos",
+        "tarif_service": "Service",
+        "tarif_soustitres": "Sous-titres",
+        "tarif_effets": "Effets spéciaux/transitions",
+        "tarif_services_supp": "Services supplémentaires",
+        "tarif_format_choix": "Format au choix",
+        "tarif_format_gratuit": "Inclus (1 format gratuit)",
+        "tarif_format_supp1": "Format supplémentaire (1-3 vidéos)",
+        "tarif_format_supp2": "Format supplémentaire (4+ vidéos)",
+        "tarif_pack1": "Pack tous formats sociaux (1-3 vidéos)",
+        "tarif_pack2": "Pack tous formats sociaux (4+ vidéos)",
+        "tarif_express": "Livraison express (48h)",
+        "tarif_deplacement": "Déplacement hors zone",
+        "tarif_km": "au-delà de 20km (aller-retour)",
+        
+        // Contact
+        "contact_titre": "Contactez-nous",
+        "contact_dispo": "Disponible également sur WhatsApp",
+        "contact_droits": "Tous droits réservés"
     },
     he: {
         // Navigation
@@ -1082,8 +1172,97 @@ const translations = {
         "nav_services": "שירותים",
         "nav_calculateur": "מחשבון",
         "nav_tarifs": "תעריפים",
-        "nav_contact": "צור קשר"
-        // Ajoutez d'autres traductions au besoin  
+        "nav_contact": "צור קשר",
+        
+        // Accueil
+        "accueil_titre": "השותף שלך בהפקת וידאו מקצועית",
+        "accueil_desc": "אנו יוצרים תוכן חזותי שמושך תשומת לב ומעביר את המסר שלך באופן אפקטיבי.",
+        "accueil_calculer": "חשב הצעת מחיר",
+        "accueil_contacter": "צור קשר",
+        
+        // Services
+        "services_titre": "השירותים שלנו",
+        "service1_titre": "עריכת וידאו",
+        "service1_desc": "עריכה מקצועית של הסרטונים שלך עם תמחור לפי דקה.",
+        "service2_titre": "צילום",
+        "service2_desc": "שירותי צילום מקצועיים לראיונות, אירועים ומצגות.",
+        "service3_titre": "פורמטים מרובים",
+        "service3_desc": "התאמת התוכן שלך לפלטפורמות שונות ורשתות חברתיות.",
+        "service4_titre": "משלוח מהיר",
+        "service4_desc": "אפשרות למשלוח מהיר תוך 48 שעות לפרויקטים דחופים.",
+        
+        // Calculateur
+        "calc_titre": "מחשבון מחירים",
+        "calc_devis": "מחשבון הצעת מחיר",
+        "calc_type_service": "סוג השירות",
+        "calc_montage": "עריכת וידאו בלבד",
+        "calc_tournage": "צילום + עריכה",
+        "calc_duree": "אורך הסרטון",
+        "calc_minute": "דקה",
+        "calc_minutes": "דקות",
+        "calc_type_video": "סוג הסרטון",
+        "calc_interview": "ראיון יחיד",
+        "calc_double_interview": "ראיון כפול/שיחה",
+        "calc_presentation": "הצגת מקום/מוצר",
+        "calc_evenement": "אירוע",
+        "calc_nombre": "מספר סרטונים",
+        "calc_options": "אפשרויות נוספות",
+        "calc_soustitres": "כתוביות",
+        "calc_effets": "אפקטים מיוחדים/מעברים",
+        "calc_formats": "פורמטים נוספים",
+        "calc_pack": "חבילת כל הפורמטים לרשתות",
+        "calc_express": "משלוח מהיר (48 שעות)",
+        "calc_lieu": "מיקום נסיעה",
+        "calc_resultat": "הצעת מחיר משוערת",
+        "calc_total": "סה\"כ",
+        "calc_note1": "* 2 סבבי תיקונים כלולים במחיר",
+        "calc_note2": "* זמן אספקה סטנדרטי: 5-10 ימי עבודה בהתאם להיקף",
+        
+        // Tarifs
+        "tarifs_titre": "טבלת תעריפים מלאה",
+        "tarif_montage": "עריכת וידאו",
+        "tarif_tournage": "צילום + עריכה",
+        "tarif_options": "אפשרויות נוספות",
+        "tarif_base": "עריכת וידאו - תעריף בסיס: 100₪ לדקה",
+        "tarif_duree": "אורך הסרטון",
+        "tarif_prix": "מחיר לסרטון",
+        "tarif_remise": "מחיר עם הנחה",
+        "tarif_videos": "סרטונים",
+        "tarif_type_video": "סוג הסרטון",
+        "tarif_description": "תיאור",
+        "tarif_interview": "ראיון יחיד",
+        "tarif_double": "ראיון כפול/שיחה",
+        "tarif_presentation": "הצגת מקום/מוצר",
+        "tarif_evenement": "אירוע",
+        "tarif_desc_interview": "אדם אחד מצולם בפריים קבוע עם רקע פשוט",
+        "tarif_desc_double": "שני אנשים מצולמים עם חילופי זוויות צילום",
+        "tarif_desc_presentation": "צילום בתנועה במרחב או של אובייקטים",
+        "tarif_desc_evenement": "תיעוד אירוע עם מספר סצנות/זוויות",
+        "tarif_remises": "הנחות כמות - צילום + עריכה",
+        "tarif_nombre": "מספר סרטונים",
+        "tarif_pourcentage": "אחוז הנחה",
+        "tarif_standard": "מחיר רגיל",
+        "tarif_remise_pourcentage": "על המחיר הכולל",
+        "tarif_commandes1": "א. להזמנות של 1-10 סרטונים",
+        "tarif_commandes2": "ב. להזמנות של 11+ סרטונים",
+        "tarif_service": "שירות",
+        "tarif_soustitres": "כתוביות",
+        "tarif_effets": "אפקטים מיוחדים/מעברים",
+        "tarif_services_supp": "שירותים נוספים",
+        "tarif_format_choix": "פורמט לבחירה",
+        "tarif_format_gratuit": "כלול (פורמט אחד חינם)",
+        "tarif_format_supp1": "פורמט נוסף (1-3 סרטונים)",
+        "tarif_format_supp2": "פורמט נוסף (4+ סרטונים)",
+        "tarif_pack1": "חבילת כל הפורמטים לרשתות (1-3 סרטונים)",
+        "tarif_pack2": "חבילת כל הפורמטים לרשתות (4+ סרטונים)",
+        "tarif_express": "משלוח מהיר (48 שעות)",
+        "tarif_deplacement": "נסיעה מחוץ לאזור",
+        "tarif_km": "מעבר ל-20 ק\"מ (הלוך ושוב)",
+        
+        // Contact
+        "contact_titre": "צור קשר",
+        "contact_dispo": "זמין גם בוואטסאפ",
+        "contact_droits": "כל הזכויות שמורות"
     }
 };
 
