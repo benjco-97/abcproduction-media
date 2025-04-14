@@ -9,6 +9,53 @@
     <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
+        /* Styles pour RTL (hébreu) */
+[dir="rtl"] {
+    text-align: right;
+}
+
+[dir="rtl"] .flex {
+    flex-direction: row-reverse;
+}
+
+[dir="rtl"] .space-x-4 > * {
+    margin-right: 1rem;
+    margin-left: 0;
+}
+
+[dir="rtl"] .space-x-6 > * {
+    margin-right: 1.5rem;
+    margin-left: 0;
+}
+
+[dir="rtl"] .mr-2 {
+    margin-right: 0;
+    margin-left: 0.5rem;
+}
+
+[dir="rtl"] .ml-2 {
+    margin-left: 0;
+    margin-right: 0.5rem;
+}
+
+[dir="rtl"] .text-right {
+    text-align: left;
+}
+
+[dir="rtl"] .text-left {
+    text-align: right;
+}
+
+/* Fix pour les tableaux RTL */
+[dir="rtl"] table th,
+[dir="rtl"] table td {
+    text-align: right;
+}
+
+/* Ajustements pour le calculateur en RTL */
+[dir="rtl"] .justify-between {
+    flex-direction: row-reverse;
+}
         /* Styles généraux */
         body {
             font-family: 'Arial', sans-serif;
@@ -278,7 +325,7 @@
         </div>
             <!-- Contenu des onglets -->
             <div id="montage-tab" class="tab-content active">
-                <h3 class="text-xl font-bold mb-4 text-blue-700">Montage Vidéo - Tarif de base : 100₪ par minute</h3>
+                <h3 class="text-xl font-bold mb-4 text-blue-700" data-translation-key="tarif_base">Montage Vidéo - Tarif de base : 100₪ par minute</h3>
                 <div class="overflow-x-auto">
                     <table>
                         <thead>
@@ -1078,7 +1125,7 @@
     });
                       // Script de traduction français/hébreu
 // Objet de traductions complet
-const translations = {
+window.translations = {
     fr: {
         // Navigation
         "nav_accueil": "Accueil",
@@ -1278,28 +1325,28 @@ const translations = {
 };
 
 // Langue actuelle (par défaut: français)
-let currentLang = 'fr';
+window.currentLang = 'fr';
 
 // Fonction pour changer de langue
 function toggleLanguage() {
     // Basculer entre français et hébreu
-    currentLang = currentLang === 'fr' ? 'he' : 'fr';
+    window.currentLang = window.currentLang === 'fr' ? 'he' : 'fr';
     
     // Mettre à jour la direction du document selon la langue
-    document.documentElement.lang = currentLang;
-    document.documentElement.dir = currentLang === 'he' ? 'rtl' : 'ltr';
+    document.documentElement.lang = window.currentLang;
+    document.documentElement.dir = window.currentLang === 'he' ? 'rtl' : 'ltr';
     
     // Appliquer les traductions
     const elements = document.querySelectorAll('[data-translation-key]');
     elements.forEach(el => {
         const key = el.getAttribute('data-translation-key');
-        if (translations[currentLang][key]) {
-            el.textContent = translations[currentLang][key];
+        if (window.translations[window.currentLang][key]) {
+            el.textContent = window.translations[window.currentLang][key];
         }
     });
     
     // Mettre à jour le texte du bouton de langue
-    document.querySelector('.language-switch').textContent = currentLang === 'fr' ? 'FR | עב' : 'עב | FR';
+    document.querySelector('.language-switch').textContent = window.currentLang === 'fr' ? 'FR | עב' : 'עב | FR';
 }
     </script>                  
 </body>
