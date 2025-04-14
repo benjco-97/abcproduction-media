@@ -1069,6 +1069,52 @@
     window.addEventListener('resize', function() {
         addSwipeInstructions();
     });
+                      // Script de traduction français/hébreu
+const translations = {
+    fr: {
+        // Navigation
+        "nav_accueil": "Accueil",
+        "nav_services": "Services",
+        "nav_calculateur": "Calculateur",
+        "nav_tarifs": "Tarifs",
+        "nav_contact": "Contact"
+        // Ajoutez d'autres traductions au besoin
+    },
+    he: {
+        // Navigation
+        "nav_accueil": "ראשי",
+        "nav_services": "שירותים",
+        "nav_calculateur": "מחשבון",
+        "nav_tarifs": "תעריפים",
+        "nav_contact": "צור קשר"
+        // Ajoutez d'autres traductions au besoin  
+    }
+};
+
+// Langue actuelle (par défaut: français)
+let currentLang = 'fr';
+
+// Fonction pour changer de langue
+function toggleLanguage() {
+    // Basculer entre français et hébreu
+    currentLang = currentLang === 'fr' ? 'he' : 'fr';
+    
+    // Mettre à jour la direction du document selon la langue
+    document.documentElement.lang = currentLang;
+    document.documentElement.dir = currentLang === 'he' ? 'rtl' : 'ltr';
+    
+    // Appliquer les traductions
+    const elements = document.querySelectorAll('[data-translation-key]');
+    elements.forEach(el => {
+        const key = el.getAttribute('data-translation-key');
+        if (translations[currentLang][key]) {
+            el.textContent = translations[currentLang][key];
+        }
+    });
+    
+    // Mettre à jour le texte du bouton de langue
+    document.querySelector('.language-switch').textContent = currentLang === 'fr' ? 'FR | עב' : 'עב | FR';
+}
     <script>                  
 </body>
 </html>
